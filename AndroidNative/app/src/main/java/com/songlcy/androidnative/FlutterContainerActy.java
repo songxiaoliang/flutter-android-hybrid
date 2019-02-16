@@ -22,7 +22,7 @@ public class FlutterContainerActy extends AppCompatActivity {
         setContentView(R.layout.activity_flutter);
         // 通过Flutter.createView创建FlutterView组件方式
         FlutterView flutterView = Flutter.createView(this, getLifecycle(), "flutterView");
-        layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         addContentView(flutterView, layoutParams);
     }
 }

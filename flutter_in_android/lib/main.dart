@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
+import 'dart:ui';
 
 void main() => runApp(MyApp());
 
@@ -71,41 +72,50 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              widget.title,
+    switch(window.defaultRouteName) {
+      case "flutterView":
+       return Scaffold(
+          body: Center(
+            child: Text('这是Flutter 文本组件')
+          )
+       );
+      default:
+        return Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  widget.title,
+                ),
+                Center(
+                  child:Text(
+                    result,
+                  )
+                ),
+                Text(
+                  '接收到Native端传来的数据：$eventVal'
+                ),
+                MaterialButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text("跳转到原生界面", style: TextStyle(color: Colors.white)),
+                  onPressed: () => onPressCallback('startActivity'),
+                ),
+                MaterialButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text("向原生端发送消息", style: TextStyle(color: Colors.white)),
+                  onPressed: () => onPressCallback('sendMsg'),
+                ),
+                MaterialButton(
+                  color: Theme.of(context).primaryColor,
+                  child: Text("向原生端发送消息, 并传递参数", style: TextStyle(color: Colors.white)),
+                  onPressed: () => onPressCallback('sendMsg', {"msg":"Hello, Android"}),
+                ),
+              ],
             ),
-            Center(
-              child:Text(
-                result,
-              )
-            ),
-            Text(
-              '接收到Native端传来的数据：$eventVal'
-            ),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text("跳转到原生界面", style: TextStyle(color: Colors.white)),
-              onPressed: () => onPressCallback('startActivity'),
-            ),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text("向原生端发送消息", style: TextStyle(color: Colors.white)),
-              onPressed: () => onPressCallback('sendMsg'),
-            ),
-            MaterialButton(
-              color: Theme.of(context).primaryColor,
-              child: Text("向原生端发送消息, 并传递参数", style: TextStyle(color: Colors.white)),
-              onPressed: () => onPressCallback('sendMsg', {"msg":"Hello, Android"}),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        );
+    }
   }
 
   Future<Null> onPressCallback(String type, [dynamic arguments]) async {
