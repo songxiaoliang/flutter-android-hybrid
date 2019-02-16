@@ -1,6 +1,7 @@
 # Android & Flutter 混合开发
 
-### 具体详情可见 Android集成Flutter及通信交互详解（博客链接：https://blog.csdn.net/u013718120/article/details/86679147）
+### Android集成Flutter及通信交互详解
+### 博客链接：https://blog.csdn.net/u013718120/article/details/86679147
 
 #### AndroidNative 为 Android 原生部分
 #### flutter_in_android 为 Flutter 部分
